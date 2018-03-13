@@ -32,7 +32,7 @@ No floating point support, maybe there'll be a module connected to system bus la
   
   Program to translate from some sort of assembly to machine code 
 
-* Compiler (Who knows how long this will become a thing) 
+* Compiler (Who knows how long until this will become a thing) 
   
   Yeah uh... not a priority. 
   

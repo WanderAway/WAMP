@@ -28,6 +28,14 @@ No floating point support, maybe there'll be a module connected to system bus la
   
     This should be pretty trivial but hey, what's the point of a processor if you can't do anything with it 
   
+* Assembler 
+  
+  Program to translate from some sort of assembly to machine code 
+
+* Compiler (Who knows how long this will become a thing) 
+  
+  Yeah uh... not a priority. 
+  
 ## Registers 
 Initial design, let's say we will arbitrarily have 16 registers, each 16 bits wide, including special purpose ones. 
 

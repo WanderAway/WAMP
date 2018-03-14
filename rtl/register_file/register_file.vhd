@@ -8,7 +8,7 @@ entity register_file is
     NUM_REGS  : integer := 16;
     SEL_WIDTH : integer := 3;
     PC_REG    : integer := 15
-  )
+  );
   port (
     clk       : in std_logic;
     
@@ -24,6 +24,11 @@ entity register_file is
   );
 end register_file;
 
+
+library ieee; 
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
 package register_file_pkg is 
 component register_file is 
   generic (
@@ -31,7 +36,7 @@ component register_file is
     NUM_REGS  : integer := 16;
     SEL_WIDTH : integer := 3;
     PC_REG    : integer := 15
-  )
+  );
   port (
     clk       : in std_logic;
     
@@ -54,7 +59,9 @@ end;
 ---------------------------------------------------------------------
 architecture rtl of register_file is 
 
-signal registers : array (0 to NUM_REGS-1) of std_logic_vector(ARCH-1 downto 0) := (others=> (others => '0'));
+  type reg_arr is array (0 to NUM_REGS-1) of std_logic_vector(ARCH-1 downto 0);
+  
+  signal registers : reg_arr := (others=> (others => '0'));
 
 begin 
 
@@ -66,7 +73,7 @@ begin
     end if;
     
     -- increment PC by number of bytes per per instruction 
-    registers(PC_REG) <= registers(PC_REG) + ARCH/8;
+    registers(PC_REG) <= std_logic_vector(unsigned(registers(PC_REG)) + ARCH/8);
   end if;
   end process reg_write; 
   -- now that I think about it, pipelining this might actually make some parts easier, 

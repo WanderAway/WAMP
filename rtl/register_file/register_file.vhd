@@ -6,11 +6,12 @@ entity register_file is
   generic (
     ARCH      : integer := 16;
     NUM_REGS  : integer := 16;
-    SEL_WIDTH : integer := 3;
+    SEL_WIDTH : integer := 4;
     PC_REG    : integer := 15
   );
   port (
     clk       : in std_logic;
+    rst       : in std_logic;
     
     sel_in    : in std_logic_vector (SEL_WIDTH-1 downto 0);
     sel_out1  : in std_logic_vector (SEL_WIDTH-1 downto 0);
@@ -34,11 +35,12 @@ component register_file is
   generic (
     ARCH      : integer := 16;
     NUM_REGS  : integer := 16;
-    SEL_WIDTH : integer := 3;
+    SEL_WIDTH : integer := 4;
     PC_REG    : integer := 15
   );
   port (
     clk       : in std_logic;
+    rst       : in std_logic;
     
     sel_in    : in std_logic_vector (SEL_WIDTH-1 downto 0);
     sel_out1  : in std_logic_vector (SEL_WIDTH-1 downto 0);
@@ -68,12 +70,16 @@ begin
   reg_write : process (clk) 
   begin
   if rising_edge(clk) then 
-    if wren = '1' then  -- need to watch for setup/hold time here, wren need to be glitch free, 
-      registers(to_integer(unsigned(sel_in))) <= d_in;
+    if rst = '1' then 
+      registers <= (others => (others => '0'));
+    else
+      if wren = '1' then  -- need to watch for setup/hold time here, wren need to be glitch free, 
+        registers(to_integer(unsigned(sel_in))) <= d_in;
+      end if;
+      
+      -- increment PC by number of bytes per per instruction 
+      registers(PC_REG) <= std_logic_vector(unsigned(registers(PC_REG)) + ARCH/8);
     end if;
-    
-    -- increment PC by number of bytes per per instruction 
-    registers(PC_REG) <= std_logic_vector(unsigned(registers(PC_REG)) + ARCH/8);
   end if;
   end process reg_write; 
   -- now that I think about it, pipelining this might actually make some parts easier, 

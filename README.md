@@ -20,6 +20,9 @@ No floating point support, maybe there'll be a module connected to system bus la
 * Peripherals 
   * UART Controller 
   
+  * UART Bootloader 
+    Also design some protocol to write to the memory so that we can actually get some program in there. 
+  
   * Memory Controller 
   
     I'm probably just going to be using the block memory within the FPGA's, but maybe I'll look into DDR... I've heard it's a nightmare.

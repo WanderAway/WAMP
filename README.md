@@ -100,18 +100,18 @@ Initial design, let's say we will arbitrarily have 16 registers, each 16 bits wi
 | Store | `STR Rs #Immediate<8>` |
 | Move | `MOV Rt Rs` |
 | Move Immediate | `MOV Rt #Immediate<8>` |
-| Push | `PSH #Immediate<8> Rs` |
+| Push | `PSH Rs #Immediate<8>` |
 | Pop | `POP Rt #Immediate<8>` |
-| Jump | `JMP #Immediate<8> Rs` |
-| Jump Conditional | `CJMP #Immediate<8> Rs` |
+| Jump | `JMP Rs #Immediate<8>` |
+| Jump Conditional | `JMC Rs #Immediate<8>` |
 | Add | `ADD Rt Rs Rd` |
 | Multiply | `MUL Rt Rs Rd` |
 | Bitwise Not | `NOT Rt Rs` |
 | Bitwise And | `AND Rt Rs Rd` |
 | Bitwise Or | `OR Rt Rs Rd` |
 | Bitwise Xor | `XOR Rt Rs Rd` |
-| Shift Left | `SHL Rs [#Immediate<4>] [Rd]` |
-| Shift Right | `SHR Rs [#Immediate<4>] [Rd]` |
+| Shift Left | `SHL Rs [Rd] [#Immediate<4>]` |
+| Shift Right | `SHR Rs [Rd] [#Immediate<4>]` |
 
 
 SUBJECT TO CHANGE

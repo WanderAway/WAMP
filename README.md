@@ -75,13 +75,43 @@ Initial design, let's say we will arbitrarily have 16 registers, each 16 bits wi
 | `0110` | Jump           | `0110SSSSIIIIIIII` | Changes PC to S+I | 
 | `0111` | Jump if True   | `0111SSSSIIIIIIII` | Changes PC to S+I if AR!=0, otherwise do nothing | 
 | `1000` | Add            | `1000TTTTSSSSDDDD` | T=S+D | 
-| `1001` | Add Immediate  | `1001TTTTIIIIIIII` | T=T+I | 
-| `1010` | Multiply       | `1010TTTTSSSSDDDD` | T=S*D |
+| `1001` | Multiply       | `1001TTTTSSSSDDDD` | T=S*D | 
+| `1010` | Bitwise Not    | `1010TTTTSSSSRRRR` | T=¬S  |
 | `1011` | Bitwise And    | `1011TTTTSSSSDDDD` | T=S&D | 
 | `1100` | Bitwise Or     | `1100TTTTSSSSDDDD` | T=S|D |
 | `1101` | Bitwise Xor    | `1101TTTTSSSSDDDD` | T=S^D | 
 | `1110` | Shift Left     | `1110SSSSIIIIDDDD` | AR=S<<I if I!=0 else or AR=S<<D | 
 | `1111` | Shift Right    | `1111SSSSIIIIDDDD` | Same as above | 
+
+## Assembler
+`Rt`:=`Target Register`
+
+`Rs`:=`Source Register`
+
+`Rd`:=`Data Register`
+
+`#Immediate<N>`:=`N bit number`
+
+`[]`:=`Optional data`
+
+| Instruction | Code |
+|:-----------:|:------:|
+| Load | `LDR Rt #Immediate<8>` |
+| Store | `STR Rs #Immediate<8>` |
+| Move | `MOV Rt Rs` |
+| Move Immediate | `MOV Rt #Immediate<8>` |
+| Push | `PSH #Immediate<8> Rs` |
+| Pop | `POP Rt #Immediate<8>` |
+| Jump | `JMP #Immediate<8> Rs` |
+| Jump Conditional | `CJMP #Immediate<8> Rs` |
+| Add | `ADD Rt Rs Rd` |
+| Multiply | `MUL Rt Rs Rd` |
+| Bitwise Not | `NOT Rt Rs` |
+| Bitwise And | `AND Rt Rs Rd` |
+| Bitwise Or | `OR Rt Rs Rd` |
+| Bitwise Xor | `XOR Rt Rs Rd` |
+| Shift Left | `SHL Rs [#Immediate<4>] [Rd]` |
+| Shift Right | `SHR Rs [#Immediate<4>] [Rd]` |
 
 
 SUBJECT TO CHANGE

@@ -1,3 +1,6 @@
+### Reconsideration: 
+I'm actually planning on changing the architecture of the mpu to use the Intel x86 instruction set, so everything will change to 32 bits. Will be a good opportunity to learn x86 assembly as well. 
+
 # "Wander Away's MicroProcessor"
 This project is built purely out of personal interest. If for whatever reason you feel like using this processor... Go ahead I guess, as long as you cite where it came from. 
 

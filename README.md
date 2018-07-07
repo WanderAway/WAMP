@@ -1,6 +1,3 @@
-### Reconsideration: 
-I'm actually planning on changing the architecture of the mpu to use the Intel x86 instruction set, so everything will change to 32 bits. Will be a good opportunity to learn x86 assembly as well. 
-
 # "Wander Away's MicroProcessor"
 This project is built purely out of personal interest. If for whatever reason you feel like using this processor... Go ahead I guess, as long as you cite where it came from. 
 
@@ -13,12 +10,16 @@ No floating point support, maybe there'll be a module connected to system bus la
   * Adder
   
     Maybe a carry lookahead adder, will look into different types at some point. 
-  * Multiplier
+  * ~~Multiplier~~ No. I'll make a co-processor or something later down the line
+
   
-    Same as adder. 
 * Processor control
 
   I guess everything else that's not the ALU or the peripherals 
+  
+* Wishbone bus controller 
+
+  Wishbone is an open source hardware bus architecture that I discovered recently, and should be able to utilize to control everything. Either that or I just default to something more simplistic...
   
 * Peripherals 
   * UART Controller 
@@ -78,7 +79,7 @@ Initial design, let's say we will arbitrarily have 16 registers, each 16 bits wi
 | `0110` | Jump           | `0110SSSSIIIIIIII` | Changes PC to S+I | 
 | `0111` | Jump if True   | `0111SSSSIIIIIIII` | Changes PC to S+I if AR!=0, otherwise do nothing | 
 | `1000` | Add            | `1000TTTTSSSSDDDD` | T=S+D | 
-| `1001` | Multiply       | `1001TTTTSSSSDDDD` | T=S*D | 
+|~~`1001`~~| ~~Multiply~~       | ~~`1001TTTTSSSSDDDD`~~ | T=S*D | 
 | `1010` | Bitwise Not    | `1010TTTTSSSSRRRR` | T=¬S  |
 | `1011` | Bitwise And    | `1011TTTTSSSSDDDD` | T=S&D | 
 | `1100` | Bitwise Or     | `1100TTTTSSSSDDDD` | T=S|D |
@@ -108,7 +109,7 @@ Initial design, let's say we will arbitrarily have 16 registers, each 16 bits wi
 | Jump | `JMP Rs #Immediate<8>` |
 | Jump Conditional | `JMC Rs #Immediate<8>` |
 | Add | `ADD Rt Rs Rd` |
-| Multiply | `MUL Rt Rs Rd` |
+| ~~Multiply~~ | ~~`MUL Rt Rs Rd`~~ |
 | Bitwise Not | `NOT Rt Rs` |
 | Bitwise And | `AND Rt Rs Rd` |
 | Bitwise Or | `OR Rt Rs Rd` |
